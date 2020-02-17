@@ -1,0 +1,34 @@
+{% load static %}
+<!-- HOME -->
+	<div id="home">
+		<!-- container -->
+		<div class="container">
+			<!-- home wrap -->
+			<div class="home-wrap">
+				<!-- home slick -->
+				<div id="home-slick">
+						<!-- banner -->
+					{% for rs in sliderlist %}
+					<div class="banner banner-1">
+						<img class="center" height="590" src="{{ rs.image.url }}">
+						<div class="banner-caption text-center">
+
+							<h3 style="background: #000000; opacity: 0.5" class="white-color font-weak">{{ rs.name }}</h3>
+							<br/>
+							<button onclick="window.location.href = '{% url 'shop:product_detail' rs.id rs.slug %}';" class="primary-btn">Shop Now</button>
+							<br/><br/>
+
+						</div>
+					</div>
+					<!-- /banner -->
+
+					{% endfor %}
+
+				</div>
+				<!-- /home slick -->
+			</div>
+			<!-- /home wrap -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /HOME -->

@@ -1,0 +1,81 @@
+{% extends "homebase.html" %}
+	{% load static %}
+{% block title %} {{ company.companyname }} {% endblock %}
+
+
+{% block sidebar %}
+    {% include "sidebar2.html" %}
+{% endblock %}
+
+{% block slider %}
+    {% include "slider.html" %}
+{% endblock %}
+
+{% block body %}
+<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li><a href="{% url 'EaganJones:company_list' %}">Eagan Jones</a></li>
+				<li><a href="{{ company.get_absolute_url }}" class="active">{{ company.companyname }}</a></li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+
+	<!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+				<!--  Product Details -->
+				<div class="product product-details clearfix">
+
+					<br class="col-md-16">
+						<div class="product-body">
+							<!--<div class="product-label">
+								<span>New</span>
+								<span class="sale">-20%</span>-->
+							</div>
+							<h2 class="product-name">{{ company.companyname }}</h2>
+
+							<h3 class="product-price">CIK: {{ company.cik }}</h3>
+
+							<h3 class="product-price">{{ company.markettier }}: {{ company.primarysymbol }}<del class="product-old-price"></del></h3>
+
+
+							<p><strong>Description:</strong></p>
+							 <p>{{ company.sicdescription }}</p>
+
+							</br>
+
+							<a href="{% url 'admin:index' %}" class="text-uppercase primary-btn" align="left" style="background-color:green">Edit</a>
+							</br></br></br>
+							<div class="col-md-16">
+								<div>
+									<div class="section-title">
+										<h2 class="title">Consolidated Statements of Cash Flows</h2>
+									</div>
+									<div>
+										{{ company.table | safe }}
+
+									</div>
+								<div>
+
+								</div>
+							</div>
+
+						</div>
+					</div>
+
+				</div>
+				<!-- /Product Details -->
+			</div>
+			<!-- /row -->
+		</div>
+		<!-- /container -->
+	</div>
+	<!-- /section -->
+{% endblock %}

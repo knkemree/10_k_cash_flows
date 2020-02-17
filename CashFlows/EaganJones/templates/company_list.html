@@ -1,0 +1,132 @@
+{% extends "homebase.html" %}
+{% load static %}
+{% block title %}Search{% endblock %}
+{% block sidebar %}
+    {% include "sidebar2.html" %}
+{% endblock %}
+{% block body %}
+<!-- BREADCRUMB -->
+	<div id="breadcrumb">
+		<div class="container">
+			<ul class="breadcrumb">
+				<li><a href="/">Home</a></li>
+				<li class="active">Search</li>
+			</ul>
+		</div>
+	</div>
+	<!-- /BREADCRUMB -->
+    <!-- section -->
+	<div class="section">
+		<!-- container -->
+		<div class="container">
+			<!-- row -->
+			<div class="row">
+					{% if messages %}
+								{% for message in messages %}
+									<div class="alert alert-{{message.tags}}" role="alert">
+										{{message}}
+									</div>
+								{% endfor %}
+							{% endif %}
+
+
+					<div class="col-md-16">
+						<div class="billing-details">
+
+                            <div class="section-title">
+                                <h3 class="title">Search Company</h3>
+
+
+							</div>
+							<div>
+
+                                    <!--<p>There are no results for your query.</p>-->
+                                    <div class="header-search ">
+										<form method="POST">
+											{% csrf_token %}
+											<input name="test" class="input search-input" type="text" placeholder="TSLA,AAPL,MSFT">
+											<select class="input search-categories">
+												<option value="0">10-K Filing</option>
+											</select>
+											<button class="search-btn"><i class="fa fa-search"></i></button>
+										 </form>
+										<div class="container">
+											<div></br></div>
+											<a>Or,</a>
+											<div></br></div>
+										</div>
+										 <form method="post" enctype="multipart/form-data">
+    										{% csrf_token %}
+											 <label>Upload Ticker Symbols: </label>
+											 <p>Upload csv file which contains only ticker symbols.</p>
+
+											 <img src="{% static 'img/SAMPLE.png' %}" alt="">
+											 	<div></br></div>
+    										<input type="file" name="csv_file1">
+											 	<div></br></div>
+    										<input type="submit" value="Submit CSV" class="primary-btn">
+										</form>
+									</div>
+
+
+									<div class="container">
+										<div></br></br></br></div>
+									</div>
+							</div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-20">
+						<div>
+							<div class="section-title">
+								<h3 class="title">CONSOLIDATED STATEMENTS OF CASH FLOWS</h3>
+							</div >
+
+							<table class="">
+
+
+								<tbody>
+								{% for rs in company_inf %}
+									<tr class="table">
+										<td class="price text-center">{{ rs.cik }}</td>
+										<a class="active clickable-row" href="{{ rs.get_absolute_url }}" ><td  class="price text-center"><strong>{{ rs.companyname }}</strong></td></a>
+										<td class="price text-center">{{ rs.markettier }}</td>
+										<td class="price text-center">{{ rs.primarysymbol }}</td>
+										<td class="price text-center">{{ rs.sicdescription }}</td>
+											</br>
+									</tr>
+										<table href="/" class="table">{{ rs.table | safe }}</table>
+
+
+
+										<a class="fa fa-file-excel-o" aria-hidden="true" href="{{ excel_link }}"> Download Full Report</a>
+										<a class="fa fa-link" aria-hidden="true" href="{{ rs.get_absolute_url }}"> Open Company Page</a>
+										</br></br></br></br>
+								{% endfor %}
+
+								</tbody>
+
+
+							</table>
+
+
+
+						</div>
+					</div>
+
+			<!-- /row -->
+		        </div>
+
+		<!-- /container -->
+	    </div>
+    </div>
+	<!-- /section -->
+{% endblock %}
+
+
+
+
+
+
+
+
